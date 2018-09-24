@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="empty_widget">
+        <item>@string/widget_empty_list</item>
+        <item>@string/widget_empty_list</item>
+        <item>@string/widget_empty_list</item>
+    </string-array>
+
+</resources>

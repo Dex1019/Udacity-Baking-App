@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Lets Bake</string>
+    <string name="authority_provider">com.example.dex.letsbake.provider.RecipesProvider</string>
+
+    <string name="recipe_servings">Servings:</string>
+    <string name="recipe_image_desc">Picture of the recipe</string>
+    <string name="recipe_step_image_desc">Video Thumbnail</string>
+    <string name="recipe_step_number">%1$s.</string>
+    <string name="recipe_step_number_pager">Step %1$d</string>
+
+    <string name="ingredients">Ingredients</string>
+    <plurals name="ingredient">
+        <item quantity="one">%1$s %2$s</item>
+        <item quantity="other">%1$s %2$ss</item>
+    </plurals>
+
+    <string name="msg_offline">You are offline</string>
+    <string name="msg_on_mobile">Make sure WiFi is turned on</string>
+    <string name="msg_dismiss">DISMISS</string>
+
+    <string name="action_refresh">Refresh</string>
+
+    <string name="pref_last_sync">last_sync</string>
+
+    <string name="widget_empty_list"> </string>
+
+    <string name="exo_controls_fullscreen_description">Fullscreen</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+    </string>
+    <string name="cooking_steps">Cooking Steps</string>
+
+</resources>
