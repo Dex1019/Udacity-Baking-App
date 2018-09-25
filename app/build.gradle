@@ -17,35 +17,44 @@ android {
         }
     }
 }
+ext.supportLibVersion = '27.1.1'
+ext.testEspressoVersion = '3.0.2'
+ext.testOtherLibVersion = '1.0.2'
+ext.butterKnifeVersion = '8.8.1'
+ext.glideVersion = '4.3.1'
+ext.schematicVersion = '0.7.0'
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    
+    androidTestImplementation "com.android.support.test:runner:$testOtherLibVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$testEspressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$testEspressoVersion"
+    androidTestImplementation "com.android.support.test:rules:$testOtherLibVersion"
+
     //Support dependency
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation "com.android.support:design:$supportLibVersion"
+    implementation "com.android.support:support-v4:$supportLibVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
+    implementation "com.android.support:cardview-v7:$supportLibVersion"
 
     // Exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:r2.4.4'
 
     // ButterKnife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
     // Glide Picture library
     implementation 'com.github.bumptech.glide:glide:4.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
 
     // Content Provider Helper library
-    implementation 'net.simonvt.schematic:schematic:0.7.0'
-    annotationProcessor 'net.simonvt.schematic:schematic-compiler:0.7.0'
-    
+    implementation "net.simonvt.schematic:schematic:$schematicVersion"
+    annotationProcessor "net.simonvt.schematic:schematic-compiler:$schematicVersion"
+
 }

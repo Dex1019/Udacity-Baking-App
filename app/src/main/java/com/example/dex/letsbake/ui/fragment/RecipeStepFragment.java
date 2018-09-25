@@ -1,7 +1,6 @@
 package com.example.dex.letsbake.ui.fragment;
 
 import android.app.Dialog;
-import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -54,12 +53,12 @@ import butterknife.ButterKnife;
 
 public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListener {
 
+    public static final String KEY_PLAY_WHEN_READY = "playWhenReady";
     private static final String TAG = RecipeStepFragment.class.getSimpleName();
     private final String STATE_RESUME_WINDOW = "resumeWindow";
     private final String STATE_RESUME_POSITION = "resumePosition";
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
     private final String STATE_IS_VISIBLE = "isVisible";
-
     @BindView(R.id.tv_recipe_step_desc)
     TextView desc;
     @BindView(R.id.media_frame)
@@ -82,6 +81,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
     private int mResumeWindow;
     private long mResumePosition;
     private boolean fragmentIsVisible = false;
+    private boolean playWhenReady;
 
 
     public RecipeStepFragment() {
@@ -99,6 +99,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
         Bundle args = getArguments();
         if (args.containsKey(RecipeStepPagerAdapter.RECIPE_VIDEO_URL)) {
@@ -114,6 +115,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
             mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
             mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
             fragmentIsVisible = savedInstanceState.getBoolean(STATE_IS_VISIBLE);
+            playWhenReady = savedInstanceState.getBoolean(KEY_PLAY_WHEN_READY);
         }
     }
 
@@ -166,6 +168,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
         outState.putLong(STATE_RESUME_POSITION, mResumePosition);
         outState.putBoolean(STATE_PLAYER_FULLSCREEN, mExoPlayerFullscreen);
         outState.putBoolean(STATE_IS_VISIBLE, fragmentIsVisible);
+        outState.putBoolean(KEY_PLAY_WHEN_READY, playWhenReady);
 
         super.onSaveInstanceState(outState);
     }
@@ -238,7 +241,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
 
             if (haveResumePosition && mResumePosition > 0) {
                 mExoPlayer.seekTo(mResumeWindow, mResumePosition);
-                mExoPlayer.setPlayWhenReady(true);
+                mExoPlayer.setPlayWhenReady(false);
             }
         }
     }
@@ -262,7 +265,6 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
 
     private void openFullscreenDialog() {
         Log.i(TAG, "openFullscreenDialog called");
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
         mFullScreenDialog.addContentView(mExoPlayerView, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -302,7 +304,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
         if (mExoPlayerView != null && mExoPlayer != null) {
             mResumeWindow = mExoPlayer.getCurrentWindowIndex();
             mResumePosition = Math.max(0, mExoPlayer.getCurrentPosition());
-
+            playWhenReady = mExoPlayer.getPlayWhenReady();
             releasePlayer();
         }
 
@@ -339,6 +341,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
             mExoPlayer.seekTo(0);
             mExoPlayer.setPlayWhenReady(false);
         }
+
     }
 
     @Override
